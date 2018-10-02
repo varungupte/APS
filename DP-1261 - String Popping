@@ -1,0 +1,32 @@
+#include<bits/stdc++.h>
+using namespace std;
+
+map<string, int> memo;
+
+int collapsable(string s) {
+    if (memo.count(s)) return memo[s];
+    int r = 0;
+    unsigned i = 0;
+    while (i < s.size()) {
+        unsigned j = i + 1;
+        while (j < s.size() && s[i] == s[j]) j++;
+        if (j - i > 1) {
+            r = collapsable(s.substr(0, i) + s.substr(j));
+            if (r) break;
+        }
+        i = j;
+    }
+    memo[s] = r;
+    return r;
+}
+
+int main() {
+    memo[""] = 1; //will return 1 when the string is empty
+    int tcc;
+    cin >> tcc;
+    string s;
+    while (tcc--) {
+        cin >> s;
+        cout << collapsable(s) << endl;
+    }
+}
