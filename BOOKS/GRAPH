@@ -1,0 +1,545 @@
+-----------------------------------------------
+DFS dfs
+
+#include<stdio.h>
+#include<conio.h>
+int a[20][20],q[20],visited[20],n,i,j,f=0,r=0;
+void dfs(int v)
+{
+    visited[v]=1; 
+    int j;
+ for(j=1;j<=n;j++)
+       {if(!visited[j]&&a[v][j]==1)
+       {q[++r]=j;
+            dfs(j);
+            }
+}
+}
+void main()
+{
+ int v;
+
+ printf("\n Enter the number of vertices:");
+ scanf("%d",&n);
+ for(i=1;i<=n;i++)
+ {
+  q[i]=0;
+  visited[i]=0;
+ }
+ printf("\n Enter graph data in matrix form:\n");
+ for(i=1;i<=n;i++)
+  for(j=1;j<=n;j++)
+   scanf("%d",&a[i][j]);
+ printf("\n Enter the starting vertex:");
+ scanf("%d",&v);
+
+ q[0]=v;
+ dfs(v);
+ printf("\n The node which are reachable are:\n");
+ for(i=0;i<n;i++)
+
+   printf("%d\t",q[i]);
+
+ getch();
+}
+--------------------------------------------------
+
+Dijkstra 
+
+#include<stdio.h>
+#include<conio.h>
+#define INFINITY 9999
+#define MAX 10
+
+void dijkstra(int G[MAX][MAX],int n,int startnode);
+
+int main()
+{
+    int G[MAX][MAX],i,j,n,u;
+    printf("Enter no. of vertices:");
+    scanf("%d",&n);
+    printf("\nEnter the adjacency matrix:\n");
+
+    for(i=0;i<n;i++)
+        for(j=0;j<n;j++)
+            scanf("%d",&G[i][j]);
+
+    printf("\nEnter the starting node:");
+    scanf("%d",&u);
+    dijkstra(G,n,u);
+
+    return 0;
+}
+
+void dijkstra(int G[MAX][MAX],int n,int startnode)
+{
+
+    int cost[MAX][MAX],distance[MAX],pred[MAX];
+    int visited[MAX],count,mindistance,nextnode,i,j;
+
+    //pred[] stores the predecessor of each node
+    //count gives the number of nodes seen so far
+    //create the cost matrix
+    for(i=0;i<n;i++)
+        for(j=0;j<n;j++)
+            if(G[i][j]==0)
+                cost[i][j]=INFINITY;
+            else
+                cost[i][j]=G[i][j];
+
+    //initialize pred[],distance[] and visited[]
+    for(i=0;i<n;i++)
+    {
+        distance[i]=cost[startnode][i];
+        pred[i]=startnode;
+        visited[i]=0;
+    }
+
+    distance[startnode]=0;
+    visited[startnode]=1;
+    count=1;
+
+    while(count<n-1)
+    {
+        mindistance=INFINITY;
+
+        //nextnode gives the node at minimum distance
+        for(i=0;i<n;i++)
+            if(distance[i]<mindistance&&!visited[i])
+            {
+                mindistance=distance[i];
+                nextnode=i;
+            }
+
+            //check if a better path exists through nextnode
+            visited[nextnode]=1;
+            for(i=0;i<n;i++)
+                if(!visited[i])
+                    if(mindistance+cost[nextnode][i]<distance[i])
+                    {
+                        distance[i]=mindistance+cost[nextnode][i];
+                        pred[i]=nextnode;
+                    }
+        count++;
+    }
+
+    //print the path and distance of each node
+    for(i=0;i<n;i++)
+        if(i!=startnode)
+        {
+            printf("\nDistance of node%d=%d",i,distance[i]);
+            printf("\nPath=%d",i);
+
+            j=i;
+            do
+            {
+                j=pred[j];
+                printf("<-%d",j);
+            }while(j!=startnode);
+    }
+}
+ -------------------------------------------------------------------------
+
+ PRIMS prims
+
+ #include<stdio.h>
+#include<conio.h>
+#define INFINITY 9999
+#define MAX 10
+
+void dijkstra(int G[MAX][MAX],int n,int startnode);
+
+int main()
+{
+    int G[MAX][MAX],i,j,n,u;
+    printf("Enter no. of vertices:");
+    scanf("%d",&n);
+    printf("\nEnter the adjacency matrix:\n");
+
+    for(i=0;i<n;i++)
+        for(j=0;j<n;j++)
+            scanf("%d",&G[i][j]);
+
+    printf("\nEnter the starting node:");
+    scanf("%d",&u);
+    dijkstra(G,n,u);
+
+    return 0;
+}
+
+void dijkstra(int G[MAX][MAX],int n,int startnode)
+{
+
+    int cost[MAX][MAX],distance[MAX],pred[MAX];
+    int visited[MAX],count,mindistance,nextnode,i,j;
+
+    //pred[] stores the predecessor of each node
+    //count gives the number of nodes seen so far
+    //create the cost matrix
+    for(i=0;i<n;i++)
+        for(j=0;j<n;j++)
+            if(G[i][j]==0)
+                cost[i][j]=INFINITY;
+            else
+                cost[i][j]=G[i][j];
+
+    //initialize pred[],distance[] and visited[]
+    for(i=0;i<n;i++)
+    {
+        distance[i]=cost[startnode][i];
+        pred[i]=startnode;
+        visited[i]=0;
+    }
+
+    distance[startnode]=0;
+    visited[startnode]=1;
+    count=1;
+
+    while(count<n-1)
+    {
+        mindistance=INFINITY;
+
+        //nextnode gives the node at minimum distance
+        for(i=0;i<n;i++)
+            if(distance[i]<mindistance&&!visited[i])
+            {
+                mindistance=distance[i];
+                nextnode=i;
+            }
+
+            //check if a better path exists through nextnode
+            visited[nextnode]=1;
+            for(i=0;i<n;i++)
+                if(!visited[i])
+                    if(cost[nextnode][i]<distance[i])
+                    {
+                        distance[i]=cost[nextnode][i];
+                        pred[i]=nextnode;
+                    }
+        count++;
+    }
+int sum=0;
+    //print the path and distance of each node
+    for(i=0;i<n;i++)
+    {
+         sum=sum+distance[i];
+    }
+    printf("%d",sum);
+    }
+
+
+
+---------------------------------------------------------------------------------
+
+TOPOLOGICAL SORT
+
+#include <stdio.h>
+#include <stdlib.h>
+
+int m,n,i,j=0,k=0;
+void topological(int v);
+int de[20],visited[20],adj[20][20];
+int main()
+{
+
+scanf("%d %d",&n,&m);
+//int adj[n][n];
+int source=0,destination=0;
+//int visited[n],de[n];
+for(i=0;i<n;i++)
+{for(j=0;j<n;j++){
+    adj[i][j]=0;
+
+}}
+for(i=0;i<m;i++)
+{
+scanf("%d %d",&source,&destination);
+adj[source][destination]=1;
+}
+int j=0;
+for(i=0;i<n;i++)
+{for(j=0;j<n;j++){
+    printf("%d ",adj[i][j]);
+}printf("\n");}
+for(i=0;i<n;i++)
+{
+de[i]=0;
+visited[i]=0;
+}
+for ( i = 0; i< n; i++)
+{if (!visited[i])
+topological(i);}
+for(i=0;i<n;i++)
+{
+printf("%d",de[i]);
+}
+    return 0;
+}
+
+void topological(int v)
+{
+visited[v]=1;int ii;
+for(ii=0;ii<n;ii++)
+{
+if(adj[v][ii]==1&&(visited[ii]==0))
+{
+topological(ii);
+}
+
+}
+de[k]=v;
+k=k+1;
+
+
+}
+---------------------------------------------------
+
+BFS
+
+#include<stdio.h>
+#include<conio.h>
+int a[20][20],q[20],visited[20],n,i,j,f=0,r=0;
+void bfs(int v)
+{
+ for(i=1;i<=n;i++)
+  {if(a[v][i] && !visited[i])
+   q[++r]=i;}
+ while(f<=r)
+ {
+  visited[q[++f]]=1;
+  bfs(q[f]);
+ }
+}
+void main()
+{
+ int v;
+
+ printf("\n Enter the number of vertices:");
+ scanf("%d",&n);
+ for(i=1;i<=n;i++)
+ {
+  q[i]=0;
+  visited[i]=0;
+ }
+ printf("\n Enter graph data in matrix form:\n");
+ for(i=1;i<=n;i++)
+  for(j=1;j<=n;j++)
+   scanf("%d",&a[i][j]);
+ printf("\n Enter the starting vertex:");
+ scanf("%d",&v);
+ visited[v]=1;
+ q[0]=v;
+ bfs(v);
+ printf("\n The node which are reachable are:\n");
+ for(i=0;i<n;i++)
+
+   printf("%d\t",q[i]);
+
+ getch();
+}
+
+--------------------------------------------------------------------------
+
+count all possible paths
+
+void Graph::countPathsUtil(int u, int d, 
+                           bool visited[],
+                           int &pathCount)
+{
+    visited[u] = true;
+ 
+    // If current vertex is 
+    // same as destination, 
+    // then increment count
+    if (u == d)
+        pathCount++;
+ 
+    // If current vertex 
+    // is not destination
+    else
+    {
+        // Recur for all the 
+        // vertices adjacent to
+        // current vertex
+        list<int>::iterator i;
+        for (i = adj[u].begin(); i != 
+                    adj[u].end(); ++i)
+            if (!visited[*i])
+                countPathsUtil(*i, d, visited,
+                                    pathCount);
+    }
+ 
+    visited[u] = false;
+}
+
+----------------------------------------------------------------------------------------
+
+#include<stdbool.h>
+
+#define nodes 6
+#define white 0
+#define gray 1
+#define black 2
+
+int G[nodes][nodes];
+
+bool DFSDetectCycle (int G[nodes][nodes], int u);
+int colorOfNode[nodes];
+
+// with cycle
+              // 0  1  2  3  4  5
+int G1[nodes][nodes] = {{0, 0, 1, 0, 0, 0}, // 0
+            {1, 0, 0, 0, 1, 0}, // 1
+            {0, 0, 0, 1, 0, 0}, // 2
+            {1, 0, 0, 0, 1, 0}, // 3
+            {0, 0, 0, 0, 0, 1}, // 4
+            {0, 0, 1, 0, 0, 0}};// 5
+
+// with no cycle
+              // 0  1  2  3  4  5
+int G2[nodes][nodes] = { {0, 0, 1, 0, 0, 0},// 0
+            {1, 0, 0, 0, 1, 0},// 1
+            {0, 0, 0, 1, 0, 0},// 2
+            {0, 0, 0, 0, 1, 0},// 3
+            {0, 0, 0, 0, 0, 0},// 4
+            {0, 0, 1, 0, 0, 0}};// 5
+
+int G3[nodes][nodes] = { {0, 0, 0, 0, 0, 0},
+{1, 0, 1, 1, 0, 0},
+{0, 0, 0, 0, 0, 0},
+{0, 0, 0, 0, 0, 1},
+{1, 0, 1, 0, 0, 0},
+{0, 1, 0, 0, 0, 0}
+};
+
+bool DFSAll (int G[nodes][nodes])
+{
+  int i = 0;
+  for (i = 0; i < nodes; i++)
+    {
+      colorOfNode[i] = white;
+    }
+  for (i = 0; i < nodes; i++)
+    {
+      if (colorOfNode[i] == white)
+    if (DFSDetectCycle (G, i))
+      {
+        return true;
+      }
+    }
+  printf ("\n");
+  return false;
+}
+
+bool DFSDetectCycle (int G[nodes][nodes], int u)
+{
+  // color veterx u gray
+  colorOfNode[u] = gray;
+
+  // explore adjacent vertices of u
+  int v = 0;
+  for (v=0;v<nodes;v++)
+    {
+      // if vertex v is not visited
+      if (G[u][v] && (colorOfNode[v] == white))
+    {
+      // then visit vertex v
+      if (DFSDetectCycle (G, v))
+        {
+          printf ("%d-", v);
+          return true;
+        }
+    }
+      // cycle found
+      else if (G[u][v] && colorOfNode[v] == gray)
+    {
+      printf ("%d-", v);
+      return true;
+    }
+    }
+  colorOfNode[u] = black;
+  return false;
+}
+
+// main
+int main ()
+{
+  if (DFSAll (G1))
+    printf ("cycle detected in G1\n");
+  else
+    printf ("no cycle detected in G1\n");
+  if (DFSAll (G2))
+    printf ("cycle detected in G2\n");
+  else
+    printf ("no cycle detected in G2\n");
+  if (DFSAll (G3))
+    printf ("cycle detected in G3\n");
+  else
+    printf ("no cycle detected in G3\n");
+  return 0;
+}
+
+----------------------------------------------------------------------------
+topological sort
+
+#include <stdio.h>
+#include <stdlib.h>
+
+int m,n,i,j=0,k=0;
+void topological(int v);
+int de[20],visited[20],adj[20][20];
+int main()
+{
+
+scanf("%d %d",&n,&m);
+//int adj[n][n];
+int source=0,destination=0;
+//int visited[n],de[n];
+for(i=0;i<n;i++)
+{for(j=0;j<n;j++){
+    adj[i][j]=0;
+
+}}
+for(i=0;i<m;i++)
+{
+scanf("%d %d",&source,&destination);
+adj[source][destination]=1;
+}
+int j=0;
+for(i=0;i<n;i++)
+{for(j=0;j<n;j++){
+    printf("%d ",adj[i][j]);
+}printf("\n");}
+for(i=0;i<n;i++)
+{
+de[i]=0;
+visited[i]=0;
+}
+
+for ( i = 0; i< n; i++)
+{if (!visited[i])
+topological(i);}
+
+for(i=0;i<n;i++)
+{
+printf("%d",de[i]);
+}
+    return 0;
+}
+
+void topological(int v)
+{
+visited[v]=1;int ii;
+for(ii=0;ii<n;ii++)
+{
+if(adj[v][ii]==1&&(visited[ii]==0))
+{
+topological(ii);
+}
+
+}
+de[k]=v;
+k=k+1;
+
+
+}

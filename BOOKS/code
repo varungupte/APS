@@ -1,0 +1,1153 @@
+ios_base::sync_with_stdio(0);
+cin.tie(0);
+
+IMPORTANT NOTES A:-
+
+#include <bits/stdc++.h>
+#include <boost/multiprecision/cpp_int.hpp>
+using namespace std;
+using boost::multiprecision::cpp_int;
+cpp_int boost_modular1(cpp_int r,cpp_int s,cpp_int p)
+{
+ 
+    cpp_int result = 1;
+    while (s > 0)
+    {
+        if (s% 2 == 1)
+            result = (result * r) % p;
+        s = s >> 1;
+        r = (r *r) % p;
+    }
+    return result;
+}
+cpp_int boost_gcd(cpp_int a2,cpp_int b2)
+{
+    if (a2 == 0)
+        return b2;
+    return boost_gcd(b2 % a2, a2);
+}
+int main()
+{
+    int t;
+    cin>>t;
+    while(t--)
+    {
+        cpp_int a,b,n,mod;
+        cin>>a;
+        cin>>b;
+        cin>>n;
+        mod = 1000000007;
+         cpp_int a1,b1,x,y,ans;
+        y=abs(a-b);
+        if(y!=0)
+        {
+            b1=boost_modular1(b,n,y);
+            a1=boost_modular1(a,n,y);
+            x=a1+b1;
+            ans=boost_gcd(y,x%y);
+            cout<<ans<<endl;
+        }
+        else if(y==0)
+        {
+            b1=boost_modular1(b,n,mod);
+            a1=boost_modular1(a,n,mod);
+            cout<<(a1+b1)<<endl;
+        }
+    }
+return 0;
+}
+ 
+IMPORTANT NOTES B:-
+
+https://www.geeksforgeeks.org/useful-array-algorithms-in-c-stl/
+https://www.geeksforgeeks.org/c-tricks-competitive-programming-c-11/
+
+IMPORTANT NOTES C:-
+
+Note that if you use push_back() after resize(), it will add elements AFTER the newly allocated size, but not INTO it. In the example above the size of the resulting vector is 25, while if we use push_back() in a second loop, it would be 30.
+vector< int > v(20);
+for(int i = 0; i < 20; i++) {
+v[i] = i+1;
+}ndividuals/register/
+v.resize(25);
+for(int i = 20; i < 25; i++) {
+v.push_back(i*2); // Writes to elements with indices [25..30), not [20..25) ! <
+}
+ // vector is resized AND INITIALIZED WITH VALUE 9.
+    vec.resize(12, 9);
+vector <int> v; // an empty integer vector
+vector <int> v(5); // 5 elements, initialised to the default
+// value of the elements, in this case 0.
+// Vector resizing is expensive, so set to
+// the max size if you can.
+vector <int> v(5,13); // 5 elements initialised to 13
+vector <int> w(v.begin(),v.end()); // initialised from another container.
+
+
+IMPORTANT NOTES D:-
+
+There are many ways to initialize vector. You may create vector from another vector:
+vector< int > v1;
+// ...
+vector< int > v2 = v1;
+vector< int > v3(v1);
+
+
+IMPORTANT NOTES E:-
+
+pair<string, pair< int,int > > P;
+string s = P.first; // extract string
+int x = P.second.first; // extract first int
+int y = P.second.second; // extract second int
+
+IMPORTANT NOTES F:-
+
+sort(X.begin(), X.end()); // Sort array in ascending order
+sort(all(X)); // Sort array in ascending order, use our #define
+sort(X.rbegin(), X.rend()); // Sort array in descending order using with reverse iterators
+
+IMPORTANT NOTES G:-
+for(int i = 1; i <= 100; i++) {
+s.insert(i); // Insert 100 elements, [1..100]
+}
+s.insert(42); // does nothing, 42 already exists in set
+for(int i = 2; i <= 100; i += 2) {
+s.erase(i); // Erase even values
+}
+int n = int(s.size()); // n will be 50
+The push_back() member may not be used with set. It make sense: since the order of elements in set does not matter, push_bacndividuals/register/k() is not applicable here.
+SET gives us a simple way to get rid of duplicates in vector, and sort it:
+vector< int > v;
+// …
+set< int > s(all(v));
+vector< int > v2(all(sort(fruit.begin(), fruit.end());
+vector<string>::iterator p1=
+find_if(fruit.begin(), fruit.end(), initial(’p’));
+vector<string>::reverse_iterator p2=
+find_if(fruit.rbegin(), fruit.rend(), initial(’p’));
+fruit.erase(p1, p2);
+These above examples use the standard algorithms, which are always useful as a
+fallback option, but the
+vector
+class has a more specialised routine which is likely
+to be faster
+fruit.remove_if(initial(’p’));
+s));
+
+
+IMPORTANT NOTES H:-
+
+If called for a vector of int-s and third parameter zero, accumulate(...) will return the sum of elements in vector:
+vector< int > v;
+// ...
+int sum = accumulate(all(v), 0);
+The result of accumulate() call always has the type of its third argument. So, if you are not sure that the sum fits in integer, specify the third parameter's type directly:
+vector< int > v;
+// ...
+long long sum = accumulate(all(v), (long long)0);
+Accumulate can even calculate the product of values. The fourth parameter holds the predicate to use in calculations. So, if you want the product:
+vector< int > v;
+// ...
+double product = accumulate(all(v), double(1), multiplies< double >());
+// don’t forget to start with 1 !
+
+
+IMPORTANT NOndividuals/register/TES I:-
+
+replace(str.begin(), str.end(), ’A’, ’B’);
+
+IMPORTANT NOTES J:-
+
+Here’s one way to count how many instances of a particular character there are in
+a string using the
+findsort(fruit.begin(), fruit.end());
+vector<string>::iterator p1=
+find_if(fruit.begin(), fruit.end(), initial(’p’));
+vector<string>::reverse_iterator p2=
+find_if(fruit.rbegin(), fruit.rend(), initial(’p’));
+fruit.erase(p1, p2);
+These above examples use the standard algorithms, which are always useful as a
+fallback option, but the
+vector
+class has a more specialised routine which is likely
+to be faster
+fruit.remove_if(initial(’p’));
+sort(fruit.begin(), fruit.end());
+vector<string>::iterator p1=
+find_if(fruit.begin(), fruit.end(), initial(’p’));
+vector<string>::reverse_iterator p2=
+find_if(fruit.rbegin(), fruit.rend(), initial(’p’));
+fruit.erase(p1, p2);
+These above examples use the standard algorithms, which are always useful as a
+fallback option, but the
+vector
+class has a more specialised routine which is likely
+to be faster
+fruit.remove_if(initial(’p’));
+
+algorithm.
+int count (const string& s, char c)
+{
+string::const_iterator i=find(s.begin(), s.end(),c);
+int n=0;
+while(i!=s.end()){
+++n;
+i=find(i+1, s.end(),c);
+}
+return n;
+}
+
+
+IMPORTANT NOTES K:-
+
+int main()
+{
+char v[]="abcd";
+cout << v << ’\t’;
+while (next_permutation(v, v+4))
+cout << v << ’\t’;
+
+
+IMPORTANT NOTES L:-
+
+sort(fruit.begin(), fruit.end());
+vector<string>::iterator p1=
+find_if(fruit.begin(), fruit.end(), initial(’p’));
+vector<string>::reverse_iterator p2=
+find_if(fruit.rbegin(), fruit.rend(), initial(’p’));
+fruit.erase(p1, p2);
+These above examples use the standard algorithms, which are always useful as a
+fallback option, but the
+vector
+class has a more specialised routine which is likely
+to be faster
+fruit.remove_if(initial(’p’));
+
+
+IMPORTANT NOTES I:-
+
+permutation of strings
+
+void permute(char *a, int l, int r)
+{
+   int i;
+   if (l == r)
+     printf("%s\n", a);
+   else
+   {
+       for (i = l; i <= r; i++)
+       {
+          swap((a+l), (a+i));
+          permute(a, l+1, r);
+          swap((a+l), (a+i)); //backtrack
+       }
+  }
+
+
+IMPORTANT NOTES M:-
+
+number of rectangles if n horizontal and m vertical lines.
+ NC2 * mC2
+
+number of squares=1^2+2^2+....n^2
+
+IMPORTANT NOTES N:-
+#include <bits/stdc++.h>
+using namespace std;
+int main()
+{
+    ios_base::sync_with_stdio(0);
+    cin.tie(0);
+    long long int n,m;
+    cin>>n>>m;
+    if((n+n-1)<m)
+    {
+        cout<<"0";
+        return 0;
+    }
+    else if(n+n-1==m)
+    {
+        cout<<"1";
+        return 0;
+    }
+    long long int p;
+    if(m<n){
+    if(m%2==0){
+   p=(m-1)/2;}
+   else
+   {p=m/2;}
+    }
+    else
+    {
+        p=n-(m/2);
+    }
+    cout<<p;
+ return 0;
+
+}
+
+IMPORTANT NOTES O:-
+
+subset sum Dynamic Programmming:-
+
+bool isSubsetSum(vector<long long int> v, int n, int sum)
+{
+	bool subset[n+1][sum+1];
+	for (int i = 0; i <= n; i++)
+	subset[i][0] = true;
+	for (int i = 1; i <= sum; i++)
+	subset[0][i] = false;
+	for (int i = 1; i <= n; i++)
+	{
+	for (int j = 1; j <= sum; j++)
+	{
+		if(j<set[i-1])
+		subset[i][j] = subset[i-1][j];
+		if (j >= set[i-1])
+		subset[i][j] = subset[i-1][j] || subset[i - 1][j-set[i-1]];
+	}
+	}
+
+	return subset[n][sum];
+}
+
+IMPORTANT NOTES P:-
+
+void printPowerSet(char *set, int set_size)
+{
+    /*set_size of power set of a set with set_size
+      n is (2**n -1)*/
+    unsigned int pow_set_size = pow(2, set_size);
+    int counter, j;
+ 
+    /*Run from counter 000..0 to 111..1*/
+    for(counter = 0; counter < pow_set_size; counter++)
+    {
+      for(j = 0; j < set_size; j++)
+       {
+          /* Check if jth bit in the counter is set
+             If set then pront jth element from set */
+          if(counter & (1<<j))
+            printf("%c", set[j]);
+       }
+       printf("\n");
+    }
+}
+
+
+IMPORTANT NOTES Q:-
+
+longest common subsequence
+
+int lcs( char *X, char *Y, int m, int n )
+{
+   int L[m+1][n+1];
+   int i, j;
+   for (i=0; i<=m; i++)
+   {
+     for (j=0; j<=n; j++)
+     {
+       if (i == 0 || j == 0)
+         L[i][j] = 0;
+  
+       else if (X[i-1] == Y[j-1])
+         L[i][j] = L[i-1][j-1] + 1;
+  
+       else
+         L[i][j] = max(L[i-1][j], L[i][j-1]);
+     }
+   }
+   return L[m][n];
+}
+IMPORTANT NOTES R:-
+
+Longest increasing subsequence:- Dynamic programming:-
+
+int lis( int arr[], int n )
+{
+    int *lis, i, j, max = 0;
+    lis = (int*) malloc ( sizeof( int ) * n );
+ 
+    /* Initialize LIS values for all indexes */
+    for (i = 0; i < n; i++ )
+        lis[i] = 1;
+ 
+    /* Compute optimized LIS values in bottom up manner */
+    for (i = 1; i < n; i++ )
+        for (j = 0; j < i; j++ ) 
+            if ( arr[i] > arr[j] && lis[i] < lis[j] + 1)
+                lis[i] = lis[j] + 1;
+ 
+    /* Pick maximum of all LIS values */
+    for (i = 0; i < n; i++ )
+        if (max < lis[i])
+            max = lis[i];
+ 
+    /* Free memory to avoid memory leak */
+    free(lis);
+ 
+    return max;
+}
+IMPORTANT NOTES S:-
+
+Finding NCR of large number:-
+
+#include <cmath>
+#include <cstdio>
+#include <vector>
+#include <iostream>
+#include <algorithm>
+using namespace std;
+#define M 1000000007 
+
+long long pwr(long long a,int b) //POWER 
+{
+    long long ret=1;
+    for(;b;b>>=1,a=a*a%M)
+        if(b&1)
+            ret=ret*a%M;
+    return ret;
+}
+int main() {
+    int n;
+    long long int val,a,b,i;
+    ios_base::sync_with_stdio(false);
+    long long int aa[1000001];
+    aa[0]=1;aa[1]=1;
+    for(i=2;i<=1000001;i++)
+    {
+        aa[i]=((aa[i-1]%M)*i)%M;
+    }
+    
+    cin>>n;
+    while(n--)
+    {
+        cin>>a>>b;
+        long long int k2=(aa[b]*aa[a-b])%M;
+        long long int p = (pwr(k2,M-2))%M; //inverse modulo
+        long long int k3=((aa[a]%M)*(p)%M)% M;
+        cout<<k3<<endl;
+        
+    }
+    return 0;
+}
+
+IMPORTANT NOTES T:-
+
+Edit Distance Dynamic programming:-
+
+int min(int x, int y, int z)
+{
+    return min(min(x, y), z);
+}
+
+int editDistDP(string str1, string str2, int m, int n)
+{
+    
+    int dp[m+1][n+1];
+    for (int i=0; i<=m; i++)
+    {
+        for (int j=0; j<=n; j++)
+        {
+            if (i==0)
+                dp[i][j] = j;
+            else if (j==0)
+                dp[i][j] = i; 
+            else if (str1[i-1] == str2[j-1])
+                dp[i][j] = dp[i-1][j-1];
+            else
+                dp[i][j] = 1 + min(dp[i][j-1],  // Insert
+                                   dp[i-1][j],  // Remove
+                                   dp[i-1][j-1]); // Replace
+        }
+    }
+ 
+    return dp[m][n];
+}
+
+IMPORTANT NOTES U:-
+
+Partition a set into two subsets such that the difference of subset sums is minimum
+
+int findMin(int arr[], int n)
+{
+    // Calculate sum of all elements
+    int sum = 0; 
+    for (int i = 0; i < n; i++)
+        sum += arr[i];
+ 
+    // Create an array to store results of subproblems
+    bool dp[n+1][sum+1];
+ 
+    // Initialize first column as true. 0 sum is possible 
+    // with all elements.
+    for (int i = 0; i <= n; i++)
+        dp[i][0] = true;
+ 
+    // Initialize top row, except dp[0][0], as false. With
+    // 0 elements, no other sum except 0 is possible
+    for (int i = 1; i <= sum; i++)
+        dp[0][i] = false;
+ 
+    // Fill the partition table in bottom up manner
+    for (int i=1; i<=n; i++)
+    {
+        for (int j=1; j<=sum; j++)
+        {
+            // If i'th element is excluded
+            dp[i][j] = dp[i-1][j];
+ 
+            // If i'th element is included
+            if (arr[i-1] <= j)
+                dp[i][j] |= dp[i-1][j-arr[i-1]];
+        }
+    }
+  
+    // Initialize difference of two sums. 
+    int diff = INT_MAX;
+     
+    // Find the largest j such that dp[n][j]
+    // is true where j loops from sum/2 t0 0
+    for (int j=sum/2; j>=0; j--)
+    {
+        // Find the 
+        if (dp[n][j] == true)
+        {
+            diff = sum-2*j;
+            break;
+        }
+    }
+    return diff;
+}
+IMPORTANT NOTES V:-
+
+Count number of ways to cover a distance
+
+int printCountDP(int dist)
+{
+    int count[dist+1];
+ 
+    // Initialize base values. There is one way to cover 0 and 1
+    // distances and two ways to cover 2 distance
+    count[0]  = 1,  count[1] = 1,  count[2] = 2;
+ 
+    // Fill the count array in bottom up manner
+    for (int i=3; i<=dist; i++)
+       count[i] = count[i-1] + count[i-2] + count[i-3];
+ 
+    return count[dist];
+}
+
+IMPORTANT NOTES W:-
+
+Find the longest path in a matrix with given constraints
+
+#include<bits/stdc++.h>
+#define n 3
+using namespace std;
+ 
+// Returns length of the longest path beginning with mat[i][j].
+// This function mainly uses lookup table dp[n][n]
+int findLongestFromACell(int i, int j, int mat[n][n], int dp[n][n])
+{
+    // Base case
+    if (i<0 || i>=n || j<0 || j>=n)
+        return 0;
+ 
+    // If this subproblem is already solved
+    if (dp[i][j] != -1)
+        return dp[i][j];
+ 
+    // Since all numbers are unique and in range from 1 to n*n,
+    // there is atmost one possible direction from any cell
+    if (j<n-1 && ((mat[i][j] +1) == mat[i][j+1]))
+       return dp[i][j] = 1 + findLongestFromACell(i,j+1,mat,dp);
+ 
+    if (j>0 && (mat[i][j] +1 == mat[i][j-1]))
+       return dp[i][j] = 1 + findLongestFromACell(i,j-1,mat,dp);
+ 
+    if (i>0 && (mat[i][j] +1 == mat[i-1][j]))
+       return dp[i][j] = 1 + findLongestFromACell(i-1,j,mat,dp);
+ 
+    if (i<n-1 && (mat[i][j] +1 == mat[i+1][j]))
+       return dp[i][j] = 1 + findLongestFromACell(i+1,j,mat,dp);
+ 
+    // If none of the adjacent fours is one greater
+    return dp[i][j] = 1;
+}
+ 
+// Returns length of the longest path beginning with any cell
+int finLongestOverAll(int mat[n][n])
+{
+    int result = 1;  // Initialize result
+ 
+    // Create a lookup table and fill all entries in it as -1
+    int dp[n][n];
+    memset(dp, -1, sizeof dp);
+ 
+    // Compute longest path beginning from all cells
+    for (int i=0; i<n; i++)
+    {
+      for (int j=0; j<n; j++)
+       {
+          if (dp[i][j] == -1)
+             findLongestFromACell(i, j, mat, dp);
+ 
+          //  Update result if needed
+          result = max(result, dp[i][j]);
+       }
+     }
+ 
+     return result;
+}
+ 
+// Driver program
+int main()
+{
+   int  mat[n][n] = {{1, 2, 9},
+                    {5, 3, 8},
+                    {4, 6, 7}};
+   cout << "Length of the longest path is "
+        << finLongestOverAll(mat);
+   return 0;
+}
+
+IMPORTANT NOTES X:-
+
+0-1 Knapsack Problem : dynamic Programming:-
+
+int max(int a, int b) { return (a > b)? a : b; }
+ 
+// Returns the maximum value that can be put in a knapsack of capacity W
+int knapSack(int W, int wt[], int val[], int n)
+{
+   int i, w;
+   int K[n+1][W+1];
+ 
+   // Build table K[][] in bottom up manner
+   for (i = 0; i <= n; i++)
+   {
+       for (w = 0; w <= W; w++)
+       {
+           if (i==0 || w==0)
+               K[i][w] = 0;
+           else if (wt[i-1] <= w)
+                 K[i][w] = max(val[i-1] + K[i-1][w-wt[i-1]],  K[i-1][w]);
+           else
+                 K[i][w] = K[i-1][w];
+       }
+   }
+ 
+   return K[n][W];
+}
+ 
+int main()
+{
+    int val[] = {60, 100, 120};
+    int wt[] = {10, 20, 30};
+    int  W = 50;
+    int n = sizeof(val)/sizeof(val[0]);
+    printf("%d", knapSack(W, wt, val, n));
+    return 0;
+}
+
+
+IMPORTANT NOTES Y:-
+
+Shortest Common Supersequence Dynamic Programming:-
+
+int shortestSuperSequence(char *X, char *Y)
+    {
+        int m = strlen(X), n = strlen(Y);
+ 
+        // find lcs
+        int l = lcs(X, Y, m, n);
+ 
+        // Result is sum of input string
+        // lengths - length of lcs
+        return (m + n - l);
+    }
+
+
+IMPORTANT NOTES Z:-
+
+EGG DROP DYNAMIC PROGRAMMING:-
+
+/* Function to get minimum number of trials needed in worst
+  case with n eggs and k floors */
+int eggDrop(int n, int k)
+{
+    /* A 2D table where entery eggFloor[i][j] will represent minimum
+       number of trials needed for i eggs and j floors. */
+    int eggFloor[n+1][k+1];
+    int res;
+    int i, j, x;
+ 
+    // We need one trial for one floor and0 trials for 0 floors
+    for (i = 1; i <= n; i++)
+    {
+        eggFloor[i][1] = 1;
+        eggFloor[i][0] = 0;
+    }
+ 
+    // We always need j trials for one egg and j floors.
+    for (j = 1; j <= k; j++)
+        eggFloor[1][j] = j;
+ 
+    // Fill rest of the entries in table using optimal substructure
+    // property
+    for (i = 2; i <= n; i++)
+    {
+        for (j = 2; j <= k; j++)
+        {
+            eggFloor[i][j] = INT_MAX;
+            for (x = 1; x <= j; x++)
+            {
+                res = 1 + max(eggFloor[i-1][x-1], eggFloor[i][j-x]);
+                if (res < eggFloor[i][j])
+                    eggFloor[i][j] = res;
+            }
+        }
+    }
+ 
+    // eggFloor[n][k] holds the result
+    return eggFloor[n][k];
+}
+IMPORTANT NOTES 1:-
+
+COIN Problem:-
+
+int minCoins(int coins[], int m, int V)
+{
+    // table[i] will be storing the minimum number of coins
+    // required for i value.  So table[V] will have result
+    int table[V+1];
+ 
+    // Base case (If given value V is 0)
+    table[0] = 0;
+ 
+    // Initialize all table values as Infinite
+    for (int i=1; i<=V; i++)
+        table[i] = INT_MAX;
+ 
+    // Compute minimum coins required for all
+    // values from 1 to V
+    for (int i=1; i<=V; i++)
+    {
+        // Go through all coins smaller than i
+        for (int j=0; j<m; j++)
+          if (coins[j] <= i)
+          {
+              int sub_res = table[i-coins[j]];
+              if (sub_res != INT_MAX && sub_res + 1 < table[i])
+                  table[i] = sub_res + 1;
+          }
+    }
+
+IMPORTANT NOTES 2:-
+
+FINDIND THE NCR:-INVERSE MODULO
+
+#include <cmath>
+#include <cstdio>
+#include <vector>
+#include <iostream>
+#include <algorithm>
+using namespace std;
+#define M 1000000007 
+
+long long pwr(long long a,int b)
+{
+    long long ret=1;
+    for(;b;b>>=1,a=a*a%M)
+        if(b&1)
+            ret=ret*a%M;
+    return ret;
+}
+/*long long int fact(long long int n)
+{
+  long long int product=1,i=0;
+  if(n==1||n==0)
+  {product=1;}
+    else
+    {
+        for(i=2;i<=n;i++)
+        {product=((product%M)*(i%M))%M;}
+    }
+  return product; 
+}*/
+int main() {
+    int n;
+    long long int val,a,b,i;
+    ios_base::sync_with_stdio(false);
+    long long int aa[1000001];
+    aa[0]=1;aa[1]=1;
+    for(i=2;i<=1000001;i++)
+    {
+        aa[i]=((aa[i-1]%M)*i)%M;
+    }
+    
+    cin>>n;
+    while(n--)
+    {
+        cin>>a>>b;
+        long long int k2=(aa[b]*aa[a-b])%M;
+        long long int p = (pwr(k2,M-2))%M; //FINDING INVERSE MODULO
+        long long int k3=((aa[a]%M)*(p)%M)% M;
+        cout<<k3<<endl;
+        
+    }
+    return 0;
+}
+
+
+IMPORTANT NOTES 3:-
+
+MAXIMUM AND MINIMUM SUM OF THE SET:-
+
+int main() {
+    long long int n,nn=0;
+    vector<long long int> v;
+    while (cin>>n) {
+                 v.push_back(n);
+                 nn=nn+1;
+                   }
+    long long int sum=0,i,best=v[0],best_min=v[0];
+      for(i=0;i<nn;i++)
+        {    
+            sum=max(v[i],sum+v[i]);
+            best=max(best,sum);
+        }
+    sum=v[0];
+      for(i=1;i<nn;i++)
+      {
+          sum=min(v[i],sum+v[i]);
+          best_min=min(best_min,sum);
+          
+      }
+     cout<<best<<endl<<best_min;
+     
+   return 0;
+
+    
+}
+
+IMPORTANT NOTES 4:-
+
+NPOS:-
+
+if (n.find("1") != string::npos)
+
+IMPORTANT NOTES 5:-
+ 
+FIBONACCI NUMBER FOR LARGE VALUE:-
+
+#include <bits/stdc++.h>
+using namespace std;
+long long int a,y,z,d;
+int fiy(long long int res[],long long int n)
+{
+    if(n == 0)
+    {res[0] = 0;res[1] = 1; return 0;}
+    fiy(res,(n/2));
+    a=res[0];y=res[1];            
+    z=2*y-a;
+    if(z<0)
+    {z=z+1000000007;}    
+    d=(a*a+y*y)%1000000007; 
+    z=(a*z)%1000000007;  
+    if((n%2)==0)
+    {res[1]=d;res[0]=z;
+    }
+    else
+    {res[1]=z+d;res[0]=d;
+    }
+    return 0;
+}
+
+int main()
+{
+    long long int n,t;
+    cin>>t;
+    while(t--)
+    {long long int res[2]={0};
+     cin>>n;
+     fiy(res,n);
+     cout<<res[0]<<endl;
+    }
+    return 0;
+}
+
+IMPORTANT NOTES 6:-
+
+MERGE STL:-
+
+        vector<int> arr1(n);
+        vector<int> arr2(m);
+        vector<int> arr(n+m);
+        //arr2,arr;
+        for(int i=0;i<n;i++)
+         cin>>arr1[i];
+        for(int i=0;i<m;i++)
+        {
+         cin>>arr2[i];
+        }
+        merge(arr1.begin(),arr1.end(),arr2.begin(),arr2.end(),arr.begin());
+
+IMPORTANT NOTES 7:-
+
+GENERATING THE NUMBER CONTAINING 4 AND 7 ONLY
+
+a[1]=4;
+    a[2]=7;
+    long long int i,pp=7,h,gg=2;
+    for(i=3;;i++)
+    {   h=i/2;
+        if ((i%2)!= 0)
+            {
+            a[i] = a[h]*10+ 4;
+            pp=a[i];
+        }
+        else
+            {
+            a[i] = a[h-1]*10+7;
+             pp=a[i];
+        }
+        if(pp>777777777)
+        {break;}
+    }
+
+IMPORTANT NOTES 8:-
+
+FOR FINDING FIRST AND LAST OCCURENCE OF A NUMBER USING BINARY SEARCH:-
+
+int first(int arr[], int low, int high, int x, int n)
+{
+	if(high >= low)
+	{
+		int mid = low + (high - low)/2;
+		if( ( mid == 0 || x > arr[mid-1]) && arr[mid] == x)
+			return mid;
+		else if(x > arr[mid])
+			return first(arr, (mid + 1), high, x, n);
+		else
+			return first(arr, low, (mid -1), x, n);
+	}
+	return -1;
+}
+
+
+/* if x is present in arr[] then returns the index of
+LAST occurrence of x in arr[0..n-1], otherwise
+returns -1 */
+int last(int arr[], int low, int high, int x, int n)
+{
+	if (high >= low)
+	{
+		int mid = low + (high - low)/2;
+		if (( mid == n-1 || x < arr[mid+1]) && arr[mid] == x)
+			return mid;
+		else if (x < arr[mid])
+			return last(arr, low, (mid -1), x, n);
+		else
+			return last(arr, (mid + 1), high, x, n);
+	}
+	return -1;
+}
+int main()
+{
+	int arr[] = {0,0,0,0,0,0,1,1,1,1};
+	int n = sizeof(arr)/sizeof(int);
+
+	int x = 1;
+	printf("First Occurrence = %dt",
+					first(arr, 0, n-1, x, n));
+	printf("nLast Occurrence = %dn",
+					last(arr, 0, n-1, x, n));
+
+	return 0;
+}
+
+
+IMPORTANT NOTES Y:-
+
+KMP ALGORITHM:- PATTERN MATCHING:-
+
+#include<bits/stdc++.h>
+ 
+void computeLPSArray(char *pat, int M, int *lps);
+ 
+// Prints occurrences of txt[] in pat[]
+void KMPSearch(char *pat, char *txt)
+{
+    int M = strlen(pat);
+    int N = strlen(txt);
+ 
+    // create lps[] that will hold the longest prefix suffix
+    // values for pattern
+    int lps[M];
+ 
+    // Preprocess the pattern (calculate lps[] array)
+    computeLPSArray(pat, M, lps);
+ 
+    int i = 0;  // index for txt[]
+    int j  = 0;  // index for pat[]
+    while (i < N)
+    {
+        if (pat[j] == txt[i])
+        {
+            j++;
+            i++;
+        }
+ 
+        if (j == M)
+        {
+            printf("Found pattern at index %d ", i-j);
+            j = lps[j-1];
+        }
+ 
+        // mismatch after j matches
+        else if (i < N && pat[j] != txt[i])
+        {
+            // Do not match lps[0..lps[j-1]] characters,
+            // they will match anyway
+            if (j != 0)
+                j = lps[j-1];
+            else
+                i = i+1;
+        }
+    }
+}
+ 
+// Fills lps[] for given patttern pat[0..M-1]
+void computeLPSArray(char *pat, int M, int *lps)
+{
+    // length of the previous longest prefix suffix
+    int len = 0;
+ 
+    lps[0] = 0; // lps[0] is always 0
+ 
+    // the loop calculates lps[i] for i = 1 to M-1
+    int i = 1;
+    while (i < M)
+    {
+        if (pat[i] == pat[len])
+        {
+            len++;
+            lps[i] = len;
+            i++;
+        }
+        else // (pat[i] != pat[len])
+        {
+            // This is tricky. Consider the example.
+            // AAACAAAA and i = 7. The idea is similar 
+            // to search step.
+            if (len != 0)
+            {
+                len = lps[len-1];
+ 
+                // Also, note that we do not increment
+                // i here
+            }
+            else // if (len == 0)
+            {
+                lps[i] = 0;
+                i++;
+            }
+        }
+    }
+}
+ 
+// Driver program to test above function
+int main()
+{
+    char txt[] = "ABABDABACDABABCABAB";
+    char pat[] = "ABABCABAB";
+    KMPSearch(pat, txt);
+    return 0;
+}
+Run on IDE
+
+IMPORTANT NOTES Y:-
+
+finding bell number:- numver of possible partitions of a set:-
+
+#include<iostream>
+using namespace std;
+ 
+// Returns count of different partitions of n
+// elements in k subsets
+int countP(int n, int k)
+{
+  // Table to store results of subproblems
+  int dp[n+1][k+1];
+ 
+  // Base cases
+  for (int i=0; i<=n; i++)
+     dp[i][0] = 0;
+  for (int i=0; i<=k; i++)
+     dp[0][k] = 0;
+ 
+  // Fill rest of the entries in dp[][]
+  // in bottom up manner
+  for (int i=1; i<=n; i++)
+     for (int j=1; j<=i; j++)
+       if (j == 1 || i == j)
+          dp[i][j] = 1;
+       else
+          dp[i][j] = j*dp[i-1][j] + dp[i-1][j-1];
+ 
+  return dp[n][k];
+}
+
+IMPORTANT NOTES Y:-
+
+Given a squarefree number x, find the number of different multiplicative partitions of x. 
+
+using bell number or above method sterling second:-
+
+https://www.geeksforgeeks.org/bell-numbers-number-of-ways-to-partition-a-set/
+
+#include<iostream>
+using namespace std;
+ 
+int bellNumber(int n)
+{
+   int bell[n+1][n+1];
+   bell[0][0] = 1;
+   for (int i=1; i<=n; i++)
+   {
+      // Explicitly fill for j = 0
+      bell[i][0] = bell[i-1][i-1];
+ 
+      // Fill for remaining values of j
+      for (int j=1; j<=i; j++)
+         bell[i][j] = bell[i-1][j-1] + bell[i][j-1];
+   }
+   return bell[n][0];
+}
+ 
+// Driver program
+int main()
+{
+   for (int n=0; n<=5; n++)
+      cout << "Bell Number " << n << " is "
+           << bellNumber(n) << endl;
+   return 0;
+}
+Run on IDE
+
+
+IMPORTANT NOTES Y:-
+
+Tilling problem:- DYNAMIC PROGRAMMING
+
+https://www.geeksforgeeks.org/count-number-ways-tile-floor-size-n-x-m-using-1-x-m-size-tiles/
+
+IMPORTANT NOTES Y:-
+
+IMPORTANT NOTES Y:-
+
+IMPORTANT NOTES Y:-
+
+IMPORTANT NOTES Y:-
